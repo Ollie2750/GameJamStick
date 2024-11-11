@@ -35,8 +35,21 @@ public class Bonfire : MonoBehaviour
             fuelGiven -= fuelCost;
         }
         fuel -= fuelUsePerFrame;
-        rigidbody.transform.localScale = new Vector3(fuel, fuel, fuel);
-        rigidbody.transform.position = new Vector3(0, fuel / 2 + 0.01f, 0);
+        if (fuel <= 0)
+        {
+            gameManager.LostGame();
+        }
+        else if (fuel > 10)
+        {
+            rigidbody.transform.localScale = new Vector3(10, 10, 10);
+            rigidbody.transform.position = new Vector3(0, 5 + 0.01f, 0);
+        }
+        else 
+        {
+            rigidbody.transform.localScale = new Vector3(fuel, fuel, fuel);
+            rigidbody.transform.position = new Vector3(0, fuel / 2 + 0.01f, 0);
+        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)

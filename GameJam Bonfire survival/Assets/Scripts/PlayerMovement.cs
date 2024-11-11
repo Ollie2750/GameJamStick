@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
+
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody rigidbody;
@@ -35,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        string name = other.gameObject.name.Split(" ")[0];
+        string name = other.gameObject.name.Split("(")[0];
         if (name == "Stick")
         {
             Destroy(other.gameObject);

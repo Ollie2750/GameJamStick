@@ -6,7 +6,6 @@ public class DeleteOnTrigger : MonoBehaviour
 {
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Hit");
         Destroy(gameObject);
     }
 }
