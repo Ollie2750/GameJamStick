@@ -10,7 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rigidbody;
     private Vector3 movement = new Vector3(0,0,0);
     private Vector2 tempMovement;
-    public int speed;
+    public float speed;
+    public float jumpPower;
 
 
     public GameManager gameManager;
@@ -22,8 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rigidbody.velocity = movement * speed;
-
+        rigidbody.transform.position += movement * speed;
     }
 
     private void OnMovement(InputValue value)
@@ -31,7 +31,17 @@ public class PlayerMovement : MonoBehaviour
         tempMovement = value.Get<Vector2>();
         movement.x = tempMovement.x;
         movement.z = tempMovement.y;
-        rigidbody.velocity += movement;
+        
+    }
+
+    private void OnJump(InputValue value)
+    {
+        Debug.Log("space");
+        if (rigidbody.velocity.y == 0)
+        {
+            Debug.Log("Jump");
+            rigidbody.AddForce(new Vector3(0,jumpPower,0));
+        }
     }
 
     void OnTriggerEnter(Collider other)
